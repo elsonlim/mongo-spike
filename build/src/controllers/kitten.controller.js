@@ -44,15 +44,21 @@ var findOne = function (req, res) { return __awaiter(_this, void 0, void 0, func
                 name = req.query.name;
                 if (!name) {
                     res.status(404).json({
-                        "message": "invalid kitten name"
+                        "message": "missing kitten name"
                     });
                 }
                 return [4 /*yield*/, Kitten.findOne({ name: name }).catch(function (err) {
                         console.log("error on fetch", err);
-                        res.status(404).send();
+                        res.status(404).json({
+                            "message": "not found"
+                        });
                     })];
             case 1:
                 myKitten = _a.sent();
+                if (!myKitten) {
+                    return [2 /*return*/];
+                }
+                ;
                 res.send(myKitten);
                 return [2 /*return*/];
         }

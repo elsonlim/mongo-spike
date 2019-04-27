@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Kitten = mongoose.model('Kitten');
 
 const findOne = async (req, res) => {
-  console.log("here");
   const name = req.query.name;
 
   if(!name) {
@@ -16,6 +15,7 @@ const findOne = async (req, res) => {
       "message": "not found"
     });
   });
+  if(!myKitten) {return};
   res.send(myKitten);
 }
 

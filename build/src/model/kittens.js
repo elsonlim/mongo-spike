@@ -1,3 +1,4 @@
+require("./db");
 var mongoose = require('mongoose');
 var kittySchema = new mongoose.Schema({
     name: String
