@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Markers</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      img[src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png"]:hover {
+        transform: scale(0.5, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        var myLatLng = {lat: 1.275303, lng: 103.8303508};
+        // {lat: 1.277096, lng: 103.835854}
+        var locations = [
+          ['Hello Stranger Reunion', 1.277096, 103.835854],
+        ];
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: myLatLng
+        });
+        // 1.277096,103.835854
+        var location= new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          label: "ME",
+        });
+
+        location.setMap(map);
+
+        const infowindow = new google.maps.InfoWindow();
+
+        let marker, i;
+        for (i = 0; i < locations.length; i++) {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map,
+            title: locations[i][0]
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+
+          var goldStar = {
+            path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+            fillColor: 'yellow',
+            fillOpacity: 0.8,
+            scale: 0.1,
+            strokeColor: 'gold',
+            strokeWeight: 14
+          };
+
+          google.maps.event.addListener(marker, 'mouseover', function() {
+              marker.setIcon(goldStar);
+          });
+          // google.maps.event.addListener(marker, 'mouseout', function() {
+          //     marker.re(icon1);
+          // });
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<API_KEY>&callback=initMap">
+    </script>
+  </body>
+</html>
