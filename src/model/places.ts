@@ -4,12 +4,9 @@ import mongoose from 'mongoose';
 /*
 {
   "name": "Nylon",
-  "description": "expensive coffee"
+  "description": "expensive coffee",
   "type" : "Point",
-  "coordinates" : [
-    -122.5,
-    37.7
-  ]
+  "coordinates" : [-122.5, 37.7]
 }
 */
 const placeSchema = new mongoose.Schema({
@@ -27,5 +24,7 @@ const placeSchema = new mongoose.Schema({
     }
   }
 });
+
+placeSchema.index({ location: "2dsphere" });
 
 mongoose.model('Place', placeSchema);

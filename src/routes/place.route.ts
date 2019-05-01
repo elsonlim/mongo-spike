@@ -1,8 +1,9 @@
 import {Router} from 'express';
 import placeController from '../controllers/place.controller';
 
-const kittenRoute = Router();
+const placeRoute = Router();
 
-kittenRoute.post('/', kittenController.create);
+placeRoute.post('/', placeController.create);
+placeRoute.get('/', placeController.find);
 
-module.exports.kittenRoute = kittenRoute;
+module.exports.placeRoute = placeRoute;

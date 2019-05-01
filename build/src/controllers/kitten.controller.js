@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var mongoose = require('mongoose');
 var Kitten = mongoose.model('Kitten');
-var findOne = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+var findOne = function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
     var name, myKitten;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -50,13 +50,16 @@ var findOne = function (req, res) { return __awaiter(_this, void 0, void 0, func
                 return [4 /*yield*/, Kitten.findOne({ name: name }).catch(function (err) {
                         console.log("error on fetch", err);
                         res.status(404).json({
-                            "message": "not found"
+                            "message": "error"
                         });
                     })];
             case 1:
                 myKitten = _a.sent();
+                console.log("myKitten", myKitten);
                 if (!myKitten) {
-                    return [2 /*return*/];
+                    res.status(404).json({
+                        "message": "not found"
+                    });
                 }
                 ;
                 res.send(myKitten);

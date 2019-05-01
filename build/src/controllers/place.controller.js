@@ -36,6 +36,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
+/*
+{
+  "name": "Hotel Boss",
+  "description": "Hotel",
+  "lng": 103.860463,
+  "lat": 1.306027
+}
+{
+  "name": "Potato Head",
+  "description": "three bun",
+  "lng": 103.841765,
+  "lat": 1.280630
+}
+*/
+var find = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var _a, lng, lat, _b, distance, myPlaces;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = req.query, lng = _a.lng, lat = _a.lat, _b = _a.distance, distance = _b === void 0 ? 1 / 3963.2 : _b;
+                console.log("###", lng, lat, distance);
+                return [4 /*yield*/, Place.find({
+                        location: {
+                            $geoWithin: {
+                                $centerSphere: [[lng, lat], distance]
+                            }
+                        }
+                    }).catch(function (err) {
+                        console.log("error on fetch", err);
+                        res.status(500).json({
+                            "message": "error"
+                        });
+                    })];
+            case 1:
+                myPlaces = _c.sent();
+                console.log("myPlaces", myPlaces);
+                if (!myPlaces) {
+                    res.status(404).json({
+                        "message": "Not Found"
+                    });
+                }
+                res.json(myPlaces);
+                return [2 /*return*/];
+        }
+    });
+}); };
 var create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
     var type, _a, name, description, lng, lat, myPlace;
     return __generator(this, function (_b) {
@@ -62,5 +108,5 @@ var create = function (req, res) { return __awaiter(_this, void 0, void 0, funct
 }); };
 module.exports = {
     create: create,
-    findOne: findOne
+    find: find
 };

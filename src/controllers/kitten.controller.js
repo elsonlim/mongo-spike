@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Kitten = mongoose.model('Kitten');
 
-const findOne = async (req, res) => {
+const findOne = async (req, res, next) => {
   const name = req.query.name;
 
   if(!name) {
@@ -12,10 +12,15 @@ const findOne = async (req, res) => {
   const myKitten = await Kitten.findOne({name}).catch((err) => {
     console.log("error on fetch", err);
     res.status(404).json({
-      "message": "not found"
+      "message": "error"
     });
   });
-  if(!myKitten) {return};
+  console.log("myKitten", myKitten);
+  if(!myKitten) {
+    res.status(404).json({
+      "message": "not found"
+    });
+  };
   res.send(myKitten);
 }
 

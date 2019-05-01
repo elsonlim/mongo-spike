@@ -8,12 +8,9 @@ var mongoose_1 = __importDefault(require("mongoose"));
 /*
 {
   "name": "Nylon",
-  "description": "expensive coffee"
+  "description": "expensive coffee",
   "type" : "Point",
-  "coordinates" : [
-    -122.5,
-    37.7
-  ]
+  "coordinates" : [-122.5, 37.7]
 }
 */
 var placeSchema = new mongoose_1.default.Schema({
@@ -31,4 +28,5 @@ var placeSchema = new mongoose_1.default.Schema({
         }
     }
 });
+placeSchema.index({ location: "2dsphere" });
 mongoose_1.default.model('Place', placeSchema);

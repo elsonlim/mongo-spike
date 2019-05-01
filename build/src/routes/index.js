@@ -1,10 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var Router = require('express').Router;
 var bodyParser = require('body-parser');
 require('../model/kittens');
+require("../model/places");
 var kittenRoute = require('./kitten.route').kittenRoute;
+var placeRoute = require('./place.route').placeRoute;
 var router = Router();
 router.use('/api/kitten', kittenRoute);
+router.use('/api/place', placeRoute);
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
