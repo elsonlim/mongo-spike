@@ -1,0 +1,69 @@
+.Header {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.Header span {
+    font-weight: 600;
+}
+
+.Header button {
+    background-color: #ff9e66;
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px;
+}
+
+.Header button:hover {
+    background-color: #ff8100;
+    cursor: pointer;
+}
+
+.Header button:focus {
+    outline: 0;
+}
+
+.Header input {
+    border: 2px solid #ff8100;
+    border-radius: 3px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.Header input:focus {
+    box-shadow: 0 0 2px 0 #ff8100;
+    outline: 0;
+}
+
+.Title {
+    border-bottom: 2px solid #ff8100;
+    font-size: x-large;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.Control {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Control-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.Control-item > * {
+    margin-bottom: 5px;
+}
+
+.Label {
+    font-weight: normal;
+    padding-right: 10px;
+}
