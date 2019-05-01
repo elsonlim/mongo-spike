@@ -5,6 +5,4 @@ COPY package.json .
 RUN npm install
 
 COPY . .
-CMD ["npm", "install", "-g", "npx"]
-CMD ["npm", "install", "-g", "typescript"]
 CMD ["npm", "run", "start-nodemon"]
