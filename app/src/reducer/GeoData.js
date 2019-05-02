@@ -2,7 +2,7 @@ const defaultState = {
   lat: 1.3521,
   lng: 103.8198,
   markers: [],
-}
+};
 
 export default (state = defaultState, action) => {
   console.log(action.type);
