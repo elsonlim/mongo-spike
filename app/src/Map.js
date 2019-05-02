@@ -1,6 +1,8 @@
 import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import './Map.css';
+import actions from './actions';
+import {connect} from 'react-redux';
 
 class Map extends React.Component {
     componentDidMount() {
@@ -10,11 +12,11 @@ class Map extends React.Component {
     }
 
     showPosition = (position) => {
-        this.props.setPosition(position.coords.latitude, position.coords.longitude);
+        this.props.updateLatLng(position.coords.latitude, position.coords.longitude);
     }
 
     handleClick = (event) => {
-        this.props.setPosition(event.latLng.lat(), event.latLng.lng());
+        this.props.updateLatLng(event.latLng.lat(), event.latLng.lng());
     }
 
     render() {
@@ -26,7 +28,7 @@ class Map extends React.Component {
                         height: "100%",
                         width: "100%"
                     }}
-                    zoom={18}
+                    zoom={14}
                     center={{
                         lat: this.props.lat,
                         lng: this.props.lng
@@ -47,4 +49,8 @@ class Map extends React.Component {
     }
 }
 
-export default Map;
+const mapStatesToPros = states => ({
+    lat: states.geoData.lat,
+    lng: states.geoData.lng,
+});
+export default connect(mapStatesToPros, actions)(Map);

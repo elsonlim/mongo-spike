@@ -1,5 +1,7 @@
 import React from 'react';
 import './Header.css';
+import {connect} from 'react-redux';
+import Actions from './actions';
 
 class Header extends React.Component {
     constructor(props) {
@@ -26,7 +28,7 @@ class Header extends React.Component {
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({"address": this.state.address}, (results, status) => {
             if (status === "OK") {
-                this.props.setPosition(
+                this.props.updateLatLng(
                     results[0].geometry.location.lat(),
                     results[0].geometry.location.lng()
                 );
@@ -35,7 +37,7 @@ class Header extends React.Component {
     }
 
     handlePositionClick = () => {
-        this.props.setPosition(this.state.inputLat, this.state.inputLng);
+        this.props.updateLatLng(this.state.inputLat, this.state.inputLng);
     }
 
     render() {
@@ -51,10 +53,10 @@ class Header extends React.Component {
                         <input id="address" type="text" value={this.state.address} placeholder="Type in an address"
                             onChange={(event) => this.setState({address: event.target.value})} />
                         <div className="Control">
-                            <input id="lat" type="text" value={this.state.inputLat}
+                            <input id="lat" type="text" value={this.props.lat}
                                 onChange={(event) => this.setState({inputLat: Number.parseFloat(event.target.value)})} />
                             <label htmlFor="lng" className="Label">Longitude</label>
-                            <input id="lng" type="text" value={this.state.inputLng}
+                            <input id="lng" type="text" value={this.props.lng}
                                 onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
                         </div>
                     </div>
@@ -68,4 +70,8 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+const mapStatesToProps = states => ({
+    lat: states.geoData.lat,
+    lng: states.geoData.lng,
+});
+export default connect(mapStatesToProps, Actions)(Header);

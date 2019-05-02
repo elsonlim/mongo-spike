@@ -2,29 +2,24 @@ import React from 'react';
 import Header from './Header';
 import Map from './Map';
 import './App.css';
+import { Provider } from 'react-redux';
+import reduxPromise from 'redux-promise-middleware';
+import { createStore, applyMiddleware } from 'redux';
+import reducer from './reducer';
+import Middleware from './middleware';
 
-class App extends React.Component {
-    constructor() {
-        super();
+const store = createStore(
+    reducer,
+    applyMiddleware(Middleware.loading, Middleware.error, reduxPromise)
+);
 
-        this.state = {
-            lat: 1.3521,
-            lng: 103.8198
-        };
-    }
-
-    setPosition = (lat, lng) => {
-        this.setState({lat, lng})
-    }
-
-    render() {
-        return(
-            <div className="App" >
-                <Header lat={this.state.lat} lng={this.state.lng} setPosition={this.setPosition}></Header>
-                <Map lat={this.state.lat} lng={this.state.lng} setPosition={this.setPosition}></Map>
-            </div>
-        );
-    }
-}
+const App = () => (
+    <Provider store={store}>
+        <div className="App" >
+            <Header />
+            <Map />
+        </div>
+    </Provider>
+);
 
 export default App;
