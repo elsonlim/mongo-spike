@@ -67,11 +67,11 @@ class Header extends React.Component {
                         <button onClick={this.handlePositionClick}>Search by Position!</button>
                     </div>
                     <div className="Control-item">
-                        <label htmlFor="lat" className="Label">New Title</label>
-                        <input id="markerTitle" type="text" value={this.state.markerTitle}
+                        <label htmlFor="lat" className="Label">New Marker</label>
+                        <input id="markerTitle" type="text" value={this.state.markerTitle} placeholder="Give your marker a name!"
                             onChange={(event) => this.setState({markerTitle: event.target.value})} />
                         <label htmlFor="lng" className="Label">Description</label>
-                        <input id="lng" type="text" value={this.state.markerDescription}
+                        <input id="lng" type="text" value={this.state.markerDescription} placeholder="Describe your new marker"
                             onChange={(event) => this.setState({markerDescription: event.target.value})} />
                         <button onClick={this.saveMarker}>Save Marker</button>
                     </div>
