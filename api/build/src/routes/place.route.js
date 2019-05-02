@@ -7,5 +7,5 @@ var express_1 = require("express");
 var place_controller_1 = __importDefault(require("../controllers/place.controller"));
 var placeRoute = express_1.Router();
 placeRoute.post('/', place_controller_1.default.create);
-placeRoute.get('/', place_controller_1.default.find);
+placeRoute.get('/', place_controller_1.default.findAll);
 module.exports.placeRoute = placeRoute;

@@ -71,6 +71,22 @@ var find = function (req, res) { return __awaiter(_this, void 0, void 0, functio
                     })];
             case 1:
                 myPlaces = _c.sent();
+                return [2 /*return*/];
+        }
+    });
+}); };
+var findAll = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var myPlaces;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Place.find().catch(function (err) {
+                    console.log("error on fetch", err);
+                    res.status(500).json({
+                        "message": "error"
+                    });
+                })];
+            case 1:
+                myPlaces = _a.sent();
                 console.log("myPlaces", myPlaces);
                 if (!myPlaces) {
                     res.status(404).json({
@@ -108,5 +124,6 @@ var create = function (req, res) { return __awaiter(_this, void 0, void 0, funct
 }); };
 module.exports = {
     create: create,
-    find: find
+    find: find,
+    findAll: findAll
 };

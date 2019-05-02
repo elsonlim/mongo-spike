@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.dev
     environment: 
       - REACT_APP_MAPSAPIKEY
-      - "apiUrl=api"
+      - API_URL=http://localhost:8080
     volumes:
       - /app/node_modules
       - ./app:/app

@@ -10,7 +10,9 @@ class Header extends React.Component {
         this.state = {
             inputLat: this.props.lat,
             inputLng: this.props.lng,
-            address: ''
+            address: '',
+            markerTitle: '',
+            markerDescription: '',
         };
     }
 
@@ -40,6 +42,10 @@ class Header extends React.Component {
         this.props.updateLatLng(this.state.inputLat, this.state.inputLng);
     }
 
+    saveMarker = () => {
+        this.props.savePlace(this.state.markerTitle, this.state.markerDescription, this.state.inputLat, this.state.inputLng);
+    }
+
     render() {
         return (
             <div className="Header">
@@ -48,6 +54,7 @@ class Header extends React.Component {
                     <div className="Control-item">
                         <label htmlFor="address" className="Label">Address</label>
                         <label htmlFor="lat" className="Label">Latitude</label>
+                        <label htmlFor="lat" className="Label">New Title</label>
                     </div>
                     <div className="Control-item">
                         <input id="address" type="text" value={this.state.address} placeholder="Type in an address"
@@ -59,10 +66,18 @@ class Header extends React.Component {
                             <input id="lng" type="text" value={this.props.lng}
                                 onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
                         </div>
+                        <div className="Control">
+                            <input id="markerTitle" type="text" value={this.state.markerTitle}
+                                onChange={(event) => this.setState({markerTitle: event.target.value})} />
+                            <label htmlFor="lng" className="Label">Description</label>
+                            <input id="lng" type="text" value={this.state.markerDescription}
+                                onChange={(event) => this.setState({markerDescription: event.target.value})} />
+                        </div>
                     </div>
                     <div className="Control-item">
                         <button onClick={this.handleAddressClick}>Search by Address!</button>
                         <button onClick={this.handlePositionClick}>Search by Position!</button>
+                        <button onClick={this.saveMarker}>Save Marker</button>
                     </div>
                 </div>
             </div>

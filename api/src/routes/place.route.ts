@@ -4,6 +4,6 @@ import placeController from '../controllers/place.controller';
 const placeRoute = Router();
 
 placeRoute.post('/', placeController.create);
-placeRoute.get('/', placeController.find);
+placeRoute.get('/', placeController.findAll);
 
 module.exports.placeRoute = placeRoute;
