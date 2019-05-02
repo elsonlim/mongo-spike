@@ -1,9 +1,9 @@
 const {MongoClient} = require('mongodb');
 const request = require('supertest');
-const {app} = require('../src/routes');
+const {app} = require('../../build/src/routes');
 var mongoose = require("mongoose");
 
-describe('insert', () => {
+describe('kitten', () => {
   let connection;
   let db;
 
@@ -33,13 +33,6 @@ describe('insert', () => {
     done();
   });
 
-  it('should return Hello!', async () => {
-    const response = await request(app).get('/');
-  
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({"message": "Hello!"});
-  });
-
   it("should create kitty", async () => {
     const mockKitten = {name: 'Puss'};
     const response = 
@@ -54,6 +47,7 @@ describe('insert', () => {
     const someCat = await Kittens.findOne(mockKitten);
     expect(someCat).toMatchObject(mockKitten);
   });
+  
   it("should return missing name message", async () => {
     const response = await request(app).get('/api/kitten');
 
@@ -61,6 +55,14 @@ describe('insert', () => {
     expect(response.body).toEqual({ 'message': 'missing kitten name' });
   });
 
+  it("should return not found", async () => {
+    const response = await request(app).get('/api/kitten?name=notExist');
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({ 'message': 'not found' });
+  });
+
+  
   it("should return kitten", async (done) => {
     const Kittens = db.collection('kittens');
     const mockKitten = {name: 'Fluffy'};

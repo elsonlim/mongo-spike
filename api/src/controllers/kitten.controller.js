@@ -5,19 +5,18 @@ const findOne = async (req, res, next) => {
   const name = req.query.name;
 
   if(!name) {
-    res.status(404).json({
+    return res.status(404).json({
       "message": "missing kitten name"
     });
   }
   const myKitten = await Kitten.findOne({name}).catch((err) => {
-    console.log("error on fetch", err);
-    res.status(404).json({
+    return res.status(404).json({
       "message": "error"
     });
   });
-  console.log("myKitten", myKitten);
+
   if(!myKitten) {
-    res.status(404).json({
+    return res.status(404).json({
       "message": "not found"
     });
   };
