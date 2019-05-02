@@ -53,30 +53,26 @@ class Header extends React.Component {
                 <div className="Control">
                     <div className="Control-item">
                         <label htmlFor="address" className="Label">Address</label>
-                        <label htmlFor="lat" className="Label">Latitude</label>
-                        <label htmlFor="lat" className="Label">New Title</label>
-                    </div>
-                    <div className="Control-item">
                         <input id="address" type="text" value={this.state.address} placeholder="Type in an address"
                             onChange={(event) => this.setState({address: event.target.value})} />
-                        <div className="Control">
-                            <input id="lat" type="text" value={this.props.lat}
-                                onChange={(event) => this.setState({inputLat: Number.parseFloat(event.target.value)})} />
-                            <label htmlFor="lng" className="Label">Longitude</label>
-                            <input id="lng" type="text" value={this.props.lng}
-                                onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
-                        </div>
-                        <div className="Control">
-                            <input id="markerTitle" type="text" value={this.state.markerTitle}
-                                onChange={(event) => this.setState({markerTitle: event.target.value})} />
-                            <label htmlFor="lng" className="Label">Description</label>
-                            <input id="lng" type="text" value={this.state.markerDescription}
-                                onChange={(event) => this.setState({markerDescription: event.target.value})} />
-                        </div>
+                        <button onClick={this.handleAddressClick}>Search by Address!</button>
                     </div>
                     <div className="Control-item">
-                        <button onClick={this.handleAddressClick}>Search by Address!</button>
+                        <label htmlFor="lat" className="Label">Latitude</label>
+                        <input id="lat" type="text" value={this.props.lat}
+                            onChange={(event) => this.setState({inputLat: Number.parseFloat(event.target.value)})} />
+                        <label htmlFor="lng" className="Label">Longitude</label>
+                        <input id="lng" type="text" value={this.props.lng}
+                            onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
                         <button onClick={this.handlePositionClick}>Search by Position!</button>
+                    </div>
+                    <div className="Control-item">
+                        <label htmlFor="lat" className="Label">New Title</label>
+                        <input id="markerTitle" type="text" value={this.state.markerTitle}
+                            onChange={(event) => this.setState({markerTitle: event.target.value})} />
+                        <label htmlFor="lng" className="Label">Description</label>
+                        <input id="lng" type="text" value={this.state.markerDescription}
+                            onChange={(event) => this.setState({markerDescription: event.target.value})} />
                         <button onClick={this.saveMarker}>Save Marker</button>
                     </div>
                 </div>

@@ -16,6 +16,7 @@
     font-size: 13px;
     font-weight: 600;
     padding: 5px;
+    width: 130px;
 }
 
 .Header button:hover {
@@ -30,6 +31,7 @@
 .Header input {
     border: 2px solid #ff8100;
     border-radius: 3px;
+    flex-grow: 1;
     padding: 5px;
     margin-right: 10px;
 }
@@ -48,15 +50,16 @@
 
 .Control {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    width: 70%;
 }
 
 .Control-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .Control-item > * {
@@ -66,4 +69,5 @@
 .Label {
     font-weight: normal;
     padding-right: 10px;
+    width: 80px;
 }
