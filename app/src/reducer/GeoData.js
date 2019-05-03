@@ -12,8 +12,7 @@ export default (state = defaultState, action) => {
     case 'markers_FULFILLED':
       return { ...state, markers: action.payload.data };
     case 'saved-places_FULFILLED':
-      const markers = [action.payload.data].concat(state.markers);
-      return { ...state, markers };
+      return { ...state, markers: [ ...state.markers, action.payload.data ] };
     default:
       return state;
   }
