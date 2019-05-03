@@ -42,6 +42,16 @@ class Header extends React.Component {
         this.props.updateLatLng(this.state.inputLat, this.state.inputLng);
     }
 
+    getCurrentLocation = () => {
+        if (window.navigator.geolocation) {
+            window.navigator.geolocation.getCurrentPosition(this.showPosition);
+        }
+    }
+
+    showPosition = (position) => {
+        this.props.updateLatLng(position.coords.latitude, position.coords.longitude);
+    }
+
     saveMarker = () => {
         this.props.savePlace(this.state.markerTitle, this.state.markerDescription, this.state.inputLat, this.state.inputLng);
     }
@@ -63,6 +73,8 @@ class Header extends React.Component {
                             onChange={(event) => this.setState({address: event.target.value})} />
                         <button onClick={this.handleAddressClick}>Search by Address!</button>
                     </div>
+                </div>
+                <div className="Control-markers">
                     <div className="Control-item">
                         <label htmlFor="lat" className="Label">Latitude</label>
                         <input id="lat" type="text" value={this.state.inputLat}
@@ -71,6 +83,9 @@ class Header extends React.Component {
                         <input id="lng" type="text" value={this.state.inputLng}
                             onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
                         <button onClick={this.handlePositionClick}>Search by Position!</button>
+                    </div>
+                    <div>
+                        <button className="Toggle" onClick={this.getCurrentLocation}>Current Location</button>
                     </div>
                 </div>
                 <div className="Control-markers">
