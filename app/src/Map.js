@@ -52,7 +52,7 @@ class Map extends React.Component {
                 clickable={false}
                 label={`${marker.name.charAt(0)}`}
                 title={marker.name}
-                icon={"http://maps.google.com/mapfiles/ms/icons/orange-dot.png"}
+                // icon={"http://maps.google.com/mapfiles/ms/icons/orange-dot.png"}
                 position={{
                   lat: marker.location.coordinates[1],
                   lng: marker.location.coordinates[0]
