@@ -45,7 +45,7 @@ class Map extends React.Component {
               lng: this.props.lng
             }}
           />
-          {
+          { this.props.showMarkers &&
             this.props.markers.map((marker, index) => (
               <Marker
                 key={index}
@@ -70,5 +70,6 @@ const mapStatesToPros = states => ({
   lat: states.geoData.lat,
   lng: states.geoData.lng,
   markers: states.geoData.markers,
+  showMarkers: states.geoData.showMarkers,
 });
 export default connect(mapStatesToPros, actions)(Map);

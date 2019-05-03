@@ -18,8 +18,14 @@ export const savePlace = (name, description, lat, lng) => ({
     axios.post(`/api/place`, {name, description, lng, lat})
 });
 
+export const toggleMarkers = (showMarkers) => ({
+  type: "toggle-markers",
+  payload: { showMarkers }
+});
+
 export default {
   updateLatLng,
   savePlace,
   getSavedPlaces,
+  toggleMarkers,
 };

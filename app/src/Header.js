@@ -10,6 +10,7 @@ class Header extends React.Component {
         this.state = {
             inputLat: this.props.lat,
             inputLng: this.props.lng,
+            showMarkers: this.props.showMarkers,
             address: '',
             markerTitle: '',
             markerDescription: '',
@@ -22,7 +23,6 @@ class Header extends React.Component {
                 inputLat: nextProps.lat,
                 inputLng: nextProps.lng
             });
-            // this.getAddress();
         }
     }
 
@@ -46,6 +46,12 @@ class Header extends React.Component {
         this.props.savePlace(this.state.markerTitle, this.state.markerDescription, this.state.inputLat, this.state.inputLng);
     }
 
+    toggleMarkers = () => {
+        const showMarkers = !this.state.showMarkers;
+        this.setState({ showMarkers });
+        this.props.toggleMarkers(showMarkers);
+    }
+
     render() {
         return (
             <div className="Header">
@@ -66,6 +72,8 @@ class Header extends React.Component {
                             onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
                         <button onClick={this.handlePositionClick}>Search by Position!</button>
                     </div>
+                </div>
+                <div className="Control-markers">
                     <div className="Control-item">
                         <label htmlFor="lat" className="Label">New Marker</label>
                         <input id="markerTitle" type="text" value={this.state.markerTitle} placeholder="Give your marker a name!"
@@ -74,6 +82,9 @@ class Header extends React.Component {
                         <input id="lng" type="text" value={this.state.markerDescription} placeholder="Describe your new marker"
                             onChange={(event) => this.setState({markerDescription: event.target.value})} />
                         <button onClick={this.saveMarker}>Save Marker</button>
+                    </div>
+                    <div>
+                        <button className="Toggle" onClick={this.toggleMarkers}>Toggle Markers</button>
                     </div>
                 </div>
             </div>
@@ -84,5 +95,6 @@ class Header extends React.Component {
 const mapStatesToProps = states => ({
     lat: states.geoData.lat,
     lng: states.geoData.lng,
+    showMarkers: states.geoData.showMarkers,
 });
 export default connect(mapStatesToProps, Actions)(Header);

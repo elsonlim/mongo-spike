@@ -55,6 +55,18 @@
     width: 70%;
 }
 
+.Control-markers {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
+    width: 100%;
+}
+
+.Control-markers .Control-item {
+    width: 70%;
+}
+
 .Control-item {
     display: flex;
     flex-direction: row;
@@ -70,4 +82,8 @@
     font-weight: normal;
     padding-right: 10px;
     width: 85px;
+}
+
+.Toggle {
+    margin-left: 10px;
 }
