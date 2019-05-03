@@ -65,10 +65,10 @@ class Header extends React.Component {
                     </div>
                     <div className="Control-item">
                         <label htmlFor="lat" className="Label">Latitude</label>
-                        <input id="lat" type="text" value={this.props.lat}
+                        <input id="lat" type="text" value={this.state.inputLat}
                             onChange={(event) => this.setState({inputLat: Number.parseFloat(event.target.value)})} />
                         <label htmlFor="lng" className="Label">Longitude</label>
-                        <input id="lng" type="text" value={this.props.lng}
+                        <input id="lng" type="text" value={this.state.inputLng}
                             onChange={(event) => this.setState({inputLng: Number.parseFloat(event.target.value)})} />
                         <button onClick={this.handlePositionClick}>Search by Position!</button>
                     </div>
