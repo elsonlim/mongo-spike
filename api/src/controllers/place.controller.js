@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const Place = mongoose.model('Place');
 
-const find = async (req, res) => {
-  const { lng, lat, distance = 1 / 3963.2 } = req.query;
+const findNearBy = async (req, res) => {
+  const onekm = 1 / 3963.2
+  const {lng, lat} = req.query;
 
   const myPlaces = await Place.find({
     location: {
       $geoWithin: {
-        $centerSphere: [[lng, lat], distance]
+        $centerSphere: [[lng, lat], onekm]
       }
     }
   }).catch((err) => {
@@ -59,6 +60,6 @@ const create = async (req, res) => {
 
 module.exports = {
   create,
-  find,
+  findNearBy,
   findAll
 };

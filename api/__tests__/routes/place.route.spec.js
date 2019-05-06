@@ -3,7 +3,7 @@ const request = require('supertest');
 const {app} = require('../../build/src/routes');
 var mongoose = require("mongoose");
 
-describe('kitten', () => {
+describe('place', () => {
   let connection;
   let db;
 

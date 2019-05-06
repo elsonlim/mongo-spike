@@ -36,16 +36,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
-var find = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var _a, lng, lat, _b, distance, myPlaces;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+var findNearBy = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var onekm, _a, lng, lat, myPlaces;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a = req.query, lng = _a.lng, lat = _a.lat, _b = _a.distance, distance = _b === void 0 ? 1 / 3963.2 : _b;
+                onekm = 1 / 3963.2;
+                _a = req.query, lng = _a.lng, lat = _a.lat;
                 return [4 /*yield*/, Place.find({
                         location: {
                             $geoWithin: {
-                                $centerSphere: [[lng, lat], distance]
+                                $centerSphere: [[lng, lat], onekm]
                             }
                         }
                     }).catch(function (err) {
@@ -54,7 +55,7 @@ var find = function (req, res) { return __awaiter(_this, void 0, void 0, functio
                         });
                     })];
             case 1:
-                myPlaces = _c.sent();
+                myPlaces = _b.sent();
                 res.json(myPlaces);
                 return [2 /*return*/];
         }
@@ -107,6 +108,6 @@ var create = function (req, res) { return __awaiter(_this, void 0, void 0, funct
 }); };
 module.exports = {
     create: create,
-    find: find,
+    findNearBy: findNearBy,
     findAll: findAll
 };

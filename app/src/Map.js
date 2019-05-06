@@ -13,12 +13,18 @@ class Map extends React.Component {
     this.props.getSavedPlaces();
   }
 
+  componentDidUpdate() {
+    console.log(this.props.nearbyMarkers);
+  }
+
   showPosition = (position) => {
     this.props.updateLatLng(position.coords.latitude, position.coords.longitude);
+    this.props.getNearbyPlace(position.coords.latitude, position.coords.longitude);
   }
 
   handleClick = (event) => {
     this.props.updateLatLng(event.latLng.lat(), event.latLng.lng());
+    this.props.getNearbyPlace(event.latLng.lat(), event.latLng.lng());
   }
 
   render() {
@@ -45,14 +51,29 @@ class Map extends React.Component {
               lng: this.props.lng
             }}
           />
-          { this.props.showMarkers &&
+          { 
+            this.props.showMarkers &&
             this.props.markers.map((marker, index) => (
+              <Marker
+                key={index}
+                clickable={false}
+                title={marker.name}
+                icon={"http://maps.google.com/mapfiles/ms/icons/orange-dot.png"}
+                position={{
+                  lat: marker.location.coordinates[1],
+                  lng: marker.location.coordinates[0]
+                }}
+              />
+            ))
+          }
+          {
+            this.props.showMarkers &&
+            this.props.nearbyMarkers.map((marker, index) => (
               <Marker
                 key={index}
                 clickable={false}
                 label={`${marker.name.charAt(0)}`}
                 title={marker.name}
-                icon={"http://maps.google.com/mapfiles/ms/icons/orange-dot.png"}
                 position={{
                   lat: marker.location.coordinates[1],
                   lng: marker.location.coordinates[0]
@@ -71,5 +92,6 @@ const mapStatesToPros = states => ({
   lng: states.geoData.lng,
   markers: states.geoData.markers,
   showMarkers: states.geoData.showMarkers,
+  nearbyMarkers: states.geoData.nearbyMarkers,
 });
 export default connect(mapStatesToPros, actions)(Map);

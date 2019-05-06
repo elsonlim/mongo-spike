@@ -2,6 +2,7 @@ const defaultState = {
   lat: 1.3521,
   lng: 103.8198,
   markers: [],
+  nearbyMarkers: [],
   showMarkers: true,
 };
 
@@ -13,7 +14,9 @@ export default (state = defaultState, action) => {
     case 'markers_FULFILLED':
       return { ...state, markers: action.payload.data };
     case 'saved-places_FULFILLED':
-      return { ...state, markers: [ ...state.markers, action.payload.data ] };
+      return { ...state, nearbyMarkers: [ ...state.markers, action.payload.data ] };
+    case 'nearby_FULFILLED':
+    return { ...state, nearbyMarkers: action.payload.data };
     case 'toggle-markers':
       return { ...state, ...action.payload };
     default:
