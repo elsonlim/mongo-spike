@@ -37,7 +37,7 @@ var _this = this;
 var mongoose = require('mongoose');
 var Place = mongoose.model('Place');
 var findNearBy = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var onekm, _a, lng, lat, myPlaces;
+    var onekm, _a, lng, lat, nearbyPlaces, allPlaces, farPlaces;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -55,8 +55,19 @@ var findNearBy = function (req, res) { return __awaiter(_this, void 0, void 0, f
                         });
                     })];
             case 1:
-                myPlaces = _b.sent();
-                res.json(myPlaces);
+                nearbyPlaces = _b.sent();
+                return [4 /*yield*/, Place.find().catch(function (err) {
+                        return res.status(500).json({
+                            "message": "error"
+                        });
+                    })];
+            case 2:
+                allPlaces = _b.sent();
+                farPlaces = allPlaces.filter(function (a) { return !nearbyPlaces.find(function (b) { return a.id === b.id; }); });
+                res.json({
+                    near: nearbyPlaces,
+                    far: farPlaces,
+                });
                 return [2 /*return*/];
         }
     });

@@ -5,7 +5,7 @@ const findNearBy = async (req, res) => {
   const onekm = 1 / 3963.2
   const {lng, lat} = req.query;
 
-  const myPlaces = await Place.find({
+  const nearbyPlaces = await Place.find({
     location: {
       $geoWithin: {
         $centerSphere: [[lng, lat], onekm]
@@ -17,7 +17,18 @@ const findNearBy = async (req, res) => {
     });
   });
 
-  res.json(myPlaces);
+  const allPlaces = await Place.find().catch((err) => {
+    return res.status(500).json({
+      "message": "error"
+    });
+  });
+
+  const farPlaces = allPlaces.filter((a) => !nearbyPlaces.find(b => a.id === b.id));
+
+  res.json({
+    near: nearbyPlaces,
+    far: farPlaces, 
+  });
 }
 
 const findAll = async (req, res) => {

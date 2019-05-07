@@ -7,8 +7,9 @@
     "test": "node_modules/.bin/jest --coverage",
     "start": "npx tsc && node ./build/src/index.js",
     "start-nodemon": "nodemon",
+    "start-pm2": "npx pm2 ./build/src/index/js",
     "store": "mongodump -h localhost --port 27017",
-    "restore": "mongorestore -h localhost --port 27017 dump",
+    "restore": "mongorestore -h localhost --port 27017 asdf",
     "import10k": "mongoimport --db test --collection kittens --type json --file ./data/generated10k.json --jsonArray"
   },
   "author": "",
@@ -17,6 +18,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.5.3",
+    "pm2": "^3.5.0",
     "supertest": "^4.0.2"
   },
   "devDependencies": {

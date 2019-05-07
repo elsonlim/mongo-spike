@@ -16,9 +16,6 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       - "dbUrl=mongodb://mongo:27017/test"
-      # - "dbUrl=mongodb+srv://cluster0-nxwtn.azure.mongodb.net/test?retryWrites=true"
-      # - MONGO_INITDB_ROOT_USERNAME
-      # - MONGO_INITDB_ROOT_PASSWORD
     volumes:
       - /app/node_modules
       - ./api:/app

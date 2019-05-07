@@ -90,8 +90,8 @@ class Map extends React.Component {
 const mapStatesToPros = states => ({
   lat: states.geoData.lat,
   lng: states.geoData.lng,
-  markers: states.geoData.markers,
+  markers: states.geoData.far,
   showMarkers: states.geoData.showMarkers,
-  nearbyMarkers: states.geoData.nearbyMarkers,
+  nearbyMarkers: states.geoData.near,
 });
 export default connect(mapStatesToPros, actions)(Map);

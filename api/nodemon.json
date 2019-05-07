@@ -6,5 +6,5 @@
     "src/**/*.test.ts",
     ".git"
   ],
-  "exec": "npx tsc && npm run start build/src/node.js"
+  "exec": "npx tsc && npm run start build/src/index.js"
 }
