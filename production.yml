@@ -6,17 +6,19 @@ services:
       dockerfile: Dockerfile.dev
     environment: 
       - REACT_APP_MAPSAPIKEY
-      - API_URL=http://localhost:8080
+      - API_URL=http://35.240.215.253:8080
   api:
     build:
       context: ./api
     environment:
-      - "dbUrl=mongodb+srv://cluster0-nxwtn.azure.mongodb.net/test?retryWrites=true"
-      - MONGO_INITDB_ROOT_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD
+      - "dbUrl=mongodb://mongo:27017/test"
     volumes:
       - /app/node_modules
       - ./api:/app
+  mongo: 
+    image: "mongo:latest"
+    ports: 
+      - "27017:27017"
   nginx: 
     restart: always
     build: 
